@@ -1,4 +1,8 @@
+FROM flnpw/ca-certificates AS certs
+
 FROM busybox
+COPY --from=certs /etc/ssl /etc/ssl
+
 ARG VERSION_TAG=0.12.24
 ARG ARTIFACT=terraform_${VERSION_TAG}_linux_amd64.zip
 ENV URL=https://releases.hashicorp.com/terraform/$VERSION_TAG/$ARTIFACT
